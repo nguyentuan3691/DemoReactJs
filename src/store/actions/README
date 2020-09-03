@@ -1,0 +1,10 @@
+Action creator means that this is a function received action and create new action
+And action which simply creates js object
+it has type and payload like:
+ex: 
+export const nameAction = (name) => { this is action creator (nameAction)
+    return {
+        type: CHANGE_NAME,
+        payload: name
+    }
+}
