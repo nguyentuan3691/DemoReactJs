@@ -2,7 +2,8 @@ import httpService from "../../core/httpService";
 import { saveToken } from "../../core/jwt.service";
 
 
-export const loginUser = (formValues: any) => (dispatch: any) =>  {
+export const loginUser = (formValues: any) =>  {
+  console.log("loginUser");
     return httpService
       .post("Authentications.Accounts", "Login", formValues)
       .then((response) => {

@@ -2,18 +2,19 @@ import * as React from "react";
 import { loginUser } from '../../store/actions/loginAction'
 import { connect } from "react-redux";
 
-interface ILoginProps {
-  children?: React.ReactNode;
-  function?: () => void;
-}
 
-interface ILoginState {
-  PhoneNumber?: String
-  Password?: String
-}
+// interface ILoginState {
+//   PhoneNumber?: string,
+//   Password?: string,
+// }
 
+// interface ILoginProps {
+//   // children?: React.ReactNode;
+//   // loginUser(): void;
+// }
 
-class Login extends React.Component<ILoginProps, ILoginState> {
+class Login extends React.Component {
+  [x: string]: any;
   // constructor(props: ILoginState) {
   //   super(props);
   //   this.state = {
@@ -21,31 +22,40 @@ class Login extends React.Component<ILoginProps, ILoginState> {
   //     Password: "",
   //   };
   // }
-  state: Readonly<ILoginState> = {
-    PhoneNumber: "",
-    Password: "",
-  }
+  // state: Readonly<ILoginState> = {
+  //   PhoneNumber: "",
+  //   Password: "",
+  // }
   
-  handleChange = (e: any) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    console.log(name, value);
-    this.setState({
-      [name]: value,
-    });
-  };
+  // handleChange = (e: any) => {
+    
+  //   const name = e.target.name;
+  //   const value = e.target.value;
+  //   console.log(name, value);
+
+  //   this.postUser("0123456798", "12346");
+  //   // this.setState({
+  //   //   [name]: value,
+  //   // });
+  // };
 
   handleSubmit = (e: any) => {
     e.preventDefault();
-    this.postUser()
+    console.log("handleSubmit");
+    var userName = e.target["PhoneNumber"].value;
+    var password = e.target["Password"].value;
+    
+    this.postUser(userName, password);
   };
 
-  postUser = async () => {
+  postUser = async (userName: string, password: string) => {
+    console.log("postUser");
     const formValues = {
-      PhoneNumber: this.state.PhoneNumber,
-      Password: this.state.Password,
+      PhoneNumber: userName,
+      Password: password,
     };
-    await this.props.loginUser(formValues);
+    return loginUser(formValues);
+    //this.props.loginUser(formValues);
   };
 
   render() {
@@ -82,4 +92,4 @@ class Login extends React.Component<ILoginProps, ILoginState> {
   }
 }
 
-export default connect(loginUser)(Login);
+export default Login;
