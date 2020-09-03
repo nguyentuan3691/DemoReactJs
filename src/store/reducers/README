@@ -1,0 +1,17 @@
+Reducer just a simple function that to transform the old state to new one
+Each reducer has 2 arguments :
+ex: const nameReducer = (state, action) => {
+    switch (action.type) {
+        casse LOGIN:
+        break
+        default:
+            return state
+    }
+}
+export default nameReducer;
+
+index.js in reducer is rootReducer which combine all reducer we do action,and map by key
+ex: 
+const rootReducer = combineReducers({
+    key: namReducer
+})

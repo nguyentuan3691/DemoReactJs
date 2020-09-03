@@ -6,9 +6,9 @@ const initialState = {
     authApi: false,
 }
 
-const authReducer = (state = initialState, action) => {
+const loginReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'LOGIN_SUCESS':
+        case 'LOGIN_SUCCESS':
             return {
                 ...state
             }
@@ -17,7 +17,7 @@ const authReducer = (state = initialState, action) => {
     }
 }
 
-export default authReducer;
+export default loginReducer;
 
 
 export const loginUser = (formValue) => (dispatch) => {
