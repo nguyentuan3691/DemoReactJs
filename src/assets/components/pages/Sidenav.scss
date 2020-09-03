@@ -1,0 +1,77 @@
+#intro {
+    /* Margin to fix overlapping fixed navbar */
+    margin-top: 58px;
+  }
+
+  .sidebar {
+    display: none;
+  }
+  
+  @media (min-width: 992px) {
+    .list-group-item.active {
+      z-index: 2;
+      color: red;
+      background-color: #ffffff;
+      border: none;
+  }
+  .fas {
+    margin-right: 25px;
+  }
+  .list-group-item {
+    position: relative;
+    display: block;
+    padding: .5rem 1rem;
+    text-decoration: none;
+    background-color: #fff;
+     border: 1px solid #fff;
+}
+    .sidebar {
+      padding: 10px;
+      display: block;
+      width: 240px;
+      height: 100%;
+      position: fixed;
+      border-right: 0 20px 40px 0 rgba(0, 0, 0, 0.05) !important;
+      background-color: #fff;
+      z-index: 2000;
+    }
+    .sidebar-layout {
+      padding-left: 240px;
+    }
+  }
+  .avatar {
+    vertical-align: middle;
+    width: 30px;
+    height: 30px;
+    margin-top: 5px;
+    border-radius: 50%;
+  }
+  .input-group-text {
+    background-color: transparent;
+    /* padding-top: .27rem; */
+    /* padding-bottom: .27rem; */
+    padding: 10px;
+    border-radius: 0px;
+    /* width: 300px; */
+}
+
+  .input-group.md-form.form-sm.form-1 input{
+    border: 1px solid #bdbdbd;
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+  }
+  .input-group.md-form.form-sm.form-2 input {
+    border: 1px solid #bdbdbd;
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+  }
+  .input-group.md-form.form-sm.form-2 input.red-border {
+    border: 1px solid #ef9a9a;
+  }
+  .input-group.md-form.form-sm.form-2 input.lime-border {
+    border: 1px solid #cddc39;
+  }
+  .input-group.md-form.form-sm.form-2 input.amber-border {
+    border: 1px solid silver;
+    width: 600px;
+  }
