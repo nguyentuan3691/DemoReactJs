@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 interface ILoginProps {
   children?: React.ReactNode;
-  function?: () => void;
+  loginUser(): void;
 }
 
 interface ILoginState {
@@ -45,7 +45,8 @@ class Login extends React.Component<ILoginProps, ILoginState> {
       PhoneNumber: this.state.PhoneNumber,
       Password: this.state.Password,
     };
-    await this.props.loginUser(formValues);
+    // await this.props.loginUser();
+    return (formValues)
   };
 
   render() {
@@ -82,4 +83,4 @@ class Login extends React.Component<ILoginProps, ILoginState> {
   }
 }
 
-export default connect(loginUser)(Login);
+export default connect({loginUser})(Login);
