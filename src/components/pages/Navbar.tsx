@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Component } from 'react';
+import Dropdown from 'react-bootstrap/Dropdown'
 import '../../assets/components/pages/Navbar.scss';
 
 interface Item {
@@ -76,7 +76,7 @@ const Navbar = (): JSX.Element => {
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <div className="container-fluid">
             {/* Navbar brand */}
-            <a className="navbar-brand" target="_blank" href="https://mdbootstrap.com/docs/standard/">
+            <a className="navbar-brand" href="https://mdbootstrap.com/docs/standard/">
               <i className="fab fa-youtube" style={{ color: 'red' }} />
             </a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarExample01" aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
@@ -98,7 +98,7 @@ const Navbar = (): JSX.Element => {
               <ul className="navbar-nav list-inline ml-auto">
                 {/* Icons */}
                 <li>
-                  <a className="nav-link" href="https://www.youtube.com/channel/UC5CF7mLQZhvx8O5GODZAhdA" rel="nofollow" target="_blank">
+                  <a className="nav-link" href="https://www.youtube.com/channel/UC5CF7mLQZhvx8O5GODZAhdA" rel="nofollow">
                     <i className="fab fa-youtube" />
                   </a>
                 </li>
@@ -118,9 +118,17 @@ const Navbar = (): JSX.Element => {
                   </a>
                 </li>
                 <li>
-                  <a >
+                  <Dropdown>
+                    <Dropdown.Toggle variant="success" id="dropdown-basic">
                     <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" className="avatar" />
-                  </a>
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                      <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                      <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                      <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
                 </li>
               </ul>
             </div>

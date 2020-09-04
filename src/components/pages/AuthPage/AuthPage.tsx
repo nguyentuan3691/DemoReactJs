@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Link, Redirect, Route } from 'react-router-dom';
+import { Switch, Link, Route } from 'react-router-dom';
 import Login from './Login';
 
 
@@ -10,6 +10,7 @@ class AuthPage extends Component {
 
 
                 <Switch>
+                    {/* <Redirect exact from="/" to="/login" /> */}
                     <Route path="/login" component={Login} />
                     
                 </Switch>
