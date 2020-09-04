@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
-import Login from "../pages/Login";
+import AuthPage from "../pages/AuthPage/AuthPage";
 import Home from "../pages/Home";
 
 class RouterURL extends Component {
@@ -9,7 +9,7 @@ class RouterURL extends Component {
       <div>
         <Switch>
           <Route path="/login">
-            <Login />
+            <AuthPage />
           </Route>
           <Route path="/home">
             <Home />
