@@ -9,7 +9,7 @@ import ForgotPassword from "./components/pages/AuthPage/ForgotPassword";
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <Switch>
         <Route path="/home" render={() => <Home />} />
         <Route path="/login" component={AuthPage} />
