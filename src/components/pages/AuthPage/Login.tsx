@@ -1,5 +1,6 @@
 import * as React from "react";
-import { loginUser } from '../../../store/actions/loginAction'
+import { loginUser } from '../../../store/actions/loginAction';
+import "../../../assets/components/pages/Login.scss";
 
 
 // interface ILoginState {
@@ -58,33 +59,35 @@ class Login extends React.Component {
   render() {
     return (
       <div>
-        <form
+       <form className="login-page"
           autoComplete="off"
           onSubmit={(e) => this.handleSubmit(e)}
         >
-          <div className="form-group row">
-            <label className="col-sm-2 col-form-label">Phone Number</label>
-            <div className="col-sm-10">
-              <input
-                minLength={8}
-                name="PhoneNumber"
-                type="number"
-                className="form-control"
-                placeholder="Phone Number"
-                required
-              />
-            </div>
+          <h2 className="text-center font-weight-bold text-login-top">Login</h2>
+          <small className="form-text text-muted text-center">
+            Sign in to start your session
+            </small>
+          <div className="form-group has-feedback">
+            <input
+              minLength={8}
+              name="PhoneNumber"
+              type="number"
+              className="form-control"
+              placeholder="Phone Numbers *"
+              required
+            />
+            <span className="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
-          <div className="form-group row">
-            <label className="col-sm-2 col-form-label">Password</label>
-            <div className="col-sm-10">
-              <input type="password" className="form-control" name="Password" placeholder="Password" />
-            </div>
+          <div className="form-group ">
+            <input type="password" name="Password" className="form-control" placeholder="Password *"/>
           </div>
-          <button type="submit" className="btn btn-info">
-            Submit
+          
+          <button type="submit" className="button btn-primary btn-submit">
+           <span>Submit</span>
           </button>
+          
         </form>
+        
       </div>
     );
   }
