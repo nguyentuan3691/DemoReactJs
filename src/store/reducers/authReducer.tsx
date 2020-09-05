@@ -1,8 +1,9 @@
 const initialState = {
     authApi: false,
+    // info: Response.Data
 }
 
-const loginReducer = (state = initialState, action: any) => {
+const authReducer = (state = initialState, action: any) => {
     switch (action.type) {
         case 'LOGIN_SUCCESS':
             return {
@@ -13,4 +14,4 @@ const loginReducer = (state = initialState, action: any) => {
     }
 }
 
-export default loginReducer;
+export default authReducer;
