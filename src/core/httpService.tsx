@@ -3,13 +3,12 @@ import JwtService from './jwt.service'
 import { success, error } from './config/sweetalert'
 
 
-
 // khởi tạo đối tượng của axios để dùng
 const http = axios.create({
     baseURL: 'http://dev.api.esrax.com/handler.dll',
     responseType: 'json',
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json"
     } 
 });
 
@@ -19,15 +18,14 @@ const HttpService = {
     CountTask: 0,
 
     setHeader(key: any, value: any) {
-        axios.defaults.headers.common[key] = value;
+      http.defaults.headers.common[key] = value;
     },
 
     // check header if auth or content-type
     checkHeaders() {
         let token = JwtService.getToken();
         if (token) {
-            this.setHeader("Authorization", `${JwtService.getToken()}`)
-            this.setHeader("Content-Type", "application/json")
+            this.setHeader("Authorization", token);
         }
     },
 
@@ -35,7 +33,7 @@ const HttpService = {
         this.CountTask +=1;
         this.checkHeaders();
 
-        let result = axios.get("?object=" + object + "&method=" + method).then((response: any) => {
+        let result = http.get("?object=" + object + "&method=" + method).then((response: any) => {
             this.doProcess(response.data)
             return response.data;
           });
