@@ -52,7 +52,7 @@ const HttpService = {
     return result;
   },
 
-  post_image(object: string, method: string, params: any) {
+  post_file(object: string, method: string, params: any) {
     this.CountTask += 1;
     this.checkHeaders();
     this.setHeader("Content-Type", "multipart/form-data")

@@ -1,29 +1,29 @@
 import React, { Component } from "react";
-import { getInfoUserLogin, updateUser } from "../../store/actions/authAction"
-import { connect } from "react-redux";
+import { getInfoUserLogin, updateUser,post_image } from "../../store/actions/authAction"
+let moment = require('moment');
+
+
 
 class InformationUser extends Component {
     state = {
+        url : null,
         Data: {
             Id: "",
             FullName: "",
             AccountType: "",
-            Birthday: "",
+            Birthday: Date,
             Address: "",
             AvatarUrl: "",
             PhoneNumber: "",
             Gender: "",
             Email: "",
-        },
+            ImageUrl: ""
+        }
     };
 
     showDOB = () => {
-        const date = new Date(1991, 6, 4)
-        const dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: '2-digit', day: '2-digit' })
-        const [{ value: month }, , { value: day }, , { value: year }] = dateTimeFormat.formatToParts(date)
-        return `${day}-${month}-${year}`
+        return moment(this.state.Data.Birthday).format("DD/MM/YYYY");
     }
-
     showGender = () => {
         return this.state.Data.Gender ? "Male" : "Female"
     }
@@ -36,20 +36,35 @@ class InformationUser extends Component {
             state
         });
     }
+    // Call from authAction
+    
+     async GetImage(formData:any) {
+       console.log(post_image)
+        return await post_image(formData);
+     } 
+     onFileChange(event:any) {
+        const formData = new FormData();
+        const file = event.target.files[0];
+        formData.append("image", file);
+        this.GetImage(formData);
+        this.state.Data.AvatarUrl = URL?.createObjectURL(file);
+        return false;
+      }
 
     handleSubmit = (e: any) => {
         e.preventDefault();
-        this.updateUserData()
+        this.updateUserData();
     }
 
     updateUserData = () => {
+        var moment = require('moment');
         let dataUser = {
             Id: this.state.Data.Id,
             PhoneNumber: this.state.Data.PhoneNumber,
             Email: this.state.Data.Email,
             FullName: this.state.Data.FullName,
             AvatarUrl: this.state.Data.AvatarUrl,
-            Birthday: this.state.Data.Birthday,
+            Birthday: moment(this.state.Data.Birthday).format(),
             Address: this.state.Data.Address,
         }
         console.log(dataUser);
@@ -73,35 +88,30 @@ class InformationUser extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col-4">
-                        <img
-                            src={this.state.Data.AvatarUrl}
-                            className="Avatar-Profile"
-                            alt="avatar"
-                        />
-                        <h3 className="font-weight-bold">{this.state.Data.FullName}</h3>
-                        <p className="text-muted font-weight-bold">{this.state.Data.AccountType}</p>
-                        <p className="font-weight-bold ">{this.state.Data.PhoneNumber}</p>
-                        <p className="font-weight-bold ">{this.showGender()}</p>
-                        <p className="font-weight-bold ">{this.showDOB()}</p>
-                        <p className="font-weight-bold ">{this.state.Data.Address}</p>
-                        <hr />
-                        <br />
+                       <form >
+                       <img src="{this.state.Data.AvatarUrl}" alt="Avatar"/>
+                       <p>{this.state.Data.AvatarUrl}</p>
+                       <input type="file" onChange={(e)=> this.onFileChange(e)} name="profile_avatar"  accept=".png, .jpg, .jpeg"  />
+                            <h3 className="font-weight-bold">{this.state.Data.FullName}</h3>
+                            <p className="text-muted font-weight-bold">{this.state.Data.AccountType}</p>
+                            <p className="font-weight-bold ">{this.state.Data.PhoneNumber}</p>
+                            <p className="font-weight-bold ">{this.showGender()}</p>
+                            <p className="font-weight-bold ">{this.state.Data.Birthday}</p>
+                            <p className="font-weight-bold ">{this.state.Data.Address}</p>
+                            <hr />
+                            <br />
+                       </form>
                     </div>
                     <div className="col-8">
                         <form onChange={(e) => this.handleChange(e)} onSubmit={(e) => this.handleSubmit(e)}>
                             <div>
-                                <button
-                                    type="submit"
-                                    className="btn btn-info"
-                                >
-                                    Save
-                                </button>
-                                <button
+                               
+                                {/* <button
                                     type="submit"
                                     className="btn btn-dark"
                                 >
                                     Cancel
-                                </button>
+                                </button> */}
                             </div>
                             <hr />
                             <div className="form-group ">
@@ -116,7 +126,7 @@ class InformationUser extends Component {
                             <div className="form-group ">
                                 <label className="float-left">Date of Birth</label>
                                 <input
-                                    type="text"
+                                    type="date"
                                     className="form-control-plaintext"
                                     name="Birthday"
                                     defaultValue={this.showDOB()}
@@ -149,6 +159,12 @@ class InformationUser extends Component {
                                     defaultValue={this.state.Data.Address}
                                 />
                             </div>
+                            <button
+                                    type="submit"
+                                    className="btn btn-info w-25 float-right"
+                                >
+                                    Save
+                                </button>
                         </form>
                     </div>
                 </div>
@@ -181,10 +197,4 @@ const mapDispatchToProps = (dispatch: any) => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(InformationUser);
-
-//Cách lấy dữ liệu
-//1. Đẩy dứ liệu lên trên store: tạo reducer, statestate
-//2. store update trong state: tạo case chứa state và tham số truyền vào là 1 obj
-//3. Đẩy dữ liệu từ state vào trong form: dùng hàm subscribe để theo dõi
-//4. Form nhận được
+export default InformationUser;
