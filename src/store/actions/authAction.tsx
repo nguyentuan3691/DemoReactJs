@@ -10,27 +10,24 @@ export const loginUser = (formValues: any) => {
         saveToken(response.Data.SessionInfo.Token);
         window.location.assign('/home')
       }
-
       return response;
     });
 };
 
 export const getInfoUserLogin = () => {
   return httpService
-    .get("Authentications.Accounts", "Me").then(response => {
-      
-      return response;
-    });
-    // .then((response) => {
-    //   const  Account = response.Data;
-    //   console.log("getInfoUserLogin");
-    //   console.log(Account);
-    //   // dispatch({
-    //   //   type: "GET_INFO_USER_SUCCESS",
-    //   //   payload: {
-    //   //     user: { ...Account }
-    //   //   },
-    //   // });
-      
-    // })
+    .get("Authentications.Accounts", "Me").then(response => { return response });
 };
+
+export const updateUser = (dataUser: any) => {
+  return httpService
+    .post("Authentications.Accounts", "Update", dataUser)
+    .then(response => {
+      if (dataUser === {}) {
+        saveToken(response.Data.SessionInfo.Token);
+        localStorage.setItem("dataUser", JSON.stringify(dataUser));
+      }
+      return response
+    })
+};
+

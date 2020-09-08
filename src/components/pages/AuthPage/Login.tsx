@@ -45,7 +45,7 @@ class Login extends React.Component {
     this.postUser(userName, password);
   };
 
-  postUser = async (userName: string, password: string) => {
+  postUser = (userName: string, password: string) => {
     const formValues = {
       PhoneNumber: userName,
       Password: password,
@@ -56,7 +56,7 @@ class Login extends React.Component {
   render() {
     return (
       <div>
-       <form className="login-page"
+        <form className="login-page"
           autoComplete="off"
           onSubmit={(e) => this.handleSubmit(e)}
         >
@@ -70,21 +70,28 @@ class Login extends React.Component {
               name="PhoneNumber"
               type="number"
               className="form-control"
-              placeholder="Phone Numbers *"
+              placeholder="Phone Numbers"
+              defaultValue="0908983936"
               required
             />
             <span className="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
           <div className="form-group ">
-            <input type="password" name="Password" className="form-control" placeholder="Password *"/>
+            <input
+              type="password"
+              name="Password"
+              className="form-control"
+              placeholder="Password"
+              defaultValue="123456"
+            />
           </div>
-          
+
           <button type="submit" className="button btn-primary btn-submit">
-           <span>Submit</span>
+            <span>Submit</span>
           </button>
-          
+
         </form>
-        
+
       </div>
     );
   }
