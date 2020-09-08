@@ -31,3 +31,15 @@ export const updateUser = (dataUser: any) => {
     })
 };
 
+export const changePassword = (formChangePassword: any) => {
+  return httpService
+  .post("Authentications.Accounts", "ChangePassword", formChangePassword)
+  .then(response => {
+    if (formChangePassword === {}) {
+      saveToken(response.Data.SessionInfo.Token);
+      localStorage.setItem("formChangePassword", JSON.stringify(formChangePassword));
+    }
+    return response
+  })
+}
+

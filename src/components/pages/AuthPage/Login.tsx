@@ -2,41 +2,7 @@ import * as React from "react";
 import { loginUser } from '../../../store/actions/authAction';
 import "../../../assets/components/pages/Login.scss";
 
-
-// interface ILoginState {
-//   PhoneNumber?: string,
-//   Password?: string,
-// }
-
-// interface ILoginProps {
-//   // children?: React.ReactNode;
-//   // loginUser(): void;
-// }
-
 class Login extends React.Component {
-  // constructor(props: ILoginState) {
-  //   super(props);
-  //   this.state = {
-  //     PhoneNumber: "",
-  //     Password: "",
-  //   };
-  // }
-  // state: Readonly<ILoginState> = {
-  //   PhoneNumber: "",
-  //   Password: "",
-  // }
-
-  // handleChange = (e: any) => {
-
-  //   const name = e.target.name;
-  //   const value = e.target.value;
-  //   console.log(name, value);
-
-  //   this.postUser("0123456798", "12346");
-  //   // this.setState({
-  //   //   [name]: value,
-  //   // });
-  // };
 
   handleSubmit = (e: any) => {
     e.preventDefault();
@@ -85,13 +51,10 @@ class Login extends React.Component {
               defaultValue="123456"
             />
           </div>
-
           <button type="submit" className="button btn-primary btn-submit">
             <span>Submit</span>
           </button>
-
         </form>
-
       </div>
     );
   }

@@ -2,6 +2,7 @@ import React from 'react';
 import '../../assets/components/pages/Navbar.scss';
 import { Link, Route } from 'react-router-dom';
 import InformationUser from './InformationUser';
+import Registration from './Registration';
 
 interface Item {
   id: number;
@@ -38,6 +39,13 @@ const Navbar = (): JSX.Element => {
               Update Infomation
             </Link>
           </li>
+
+          <li>
+            <Link to="/home/create-member">
+              Create Member
+            </Link>
+          </li>
+
           <li style={{ bottom: '1px' }}>
             <span onClick={() => logout()}>Logout</span>
           </li>
@@ -97,7 +105,7 @@ const Navbar = (): JSX.Element => {
               <ul className="navbar-nav list-inline ml-auto">
                 <li>
                   <img
-                    src="https://cleverbee.me/plight/images/faces/female/25.jpg"
+                    src=""
                     alt="Avatar"
                     className="avatar"
                   />
@@ -107,6 +115,7 @@ const Navbar = (): JSX.Element => {
           </div>
         </nav>
       <Route path="/home/information-update" component={InformationUser}/>
+      <Route path="/home/create-member" component={Registration}/>
       </div>
     </div>
   </div>

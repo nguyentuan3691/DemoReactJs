@@ -52,7 +52,7 @@ const HttpService = {
     return result;
   },
 
-  post_image(object: string, method: string, params: any) {
+  post_file(object: string, method: string, params: any) {
     this.CountTask += 1;
     this.checkHeaders();
     this.setHeader("Content-Type", "multipart/form-data")
@@ -62,7 +62,7 @@ const HttpService = {
     });
     return result;
   },
-  
+
   doProcess(data: any) {
     if (data.JavaScript) {
       // eslint-disable-next-line no-eval
@@ -103,5 +103,16 @@ const HttpService = {
     }, 500);
   }
 };
+// let opened = false;
+
+//   setInterval(() => {
+//     if (http.CountTask > 0 && !opened) {
+//       loader.open();
+//       opened = true;
+//     } else if (http.CountTask <= 0 && opened) {
+//       loader.hide();
+//       opened = false;
+//     }
+//   }, 300);
 
 export default HttpService;
