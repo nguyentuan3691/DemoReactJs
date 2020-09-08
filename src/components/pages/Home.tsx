@@ -8,7 +8,7 @@ class Home extends Component {
     return (
       <div>
           <Navbar />
-          <Footer />
+          
 
       </div>
     );

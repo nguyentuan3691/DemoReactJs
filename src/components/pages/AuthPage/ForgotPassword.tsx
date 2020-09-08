@@ -4,7 +4,7 @@ class ForgotPassword extends Component {
     render() {
         return (
             <div>
-                Hello world
+              <h1>Hello Khải</h1>
             </div>
         );
     }
