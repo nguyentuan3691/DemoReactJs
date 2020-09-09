@@ -1,33 +1,59 @@
 import React, { Component } from "react";
-import { getInfoUserLogin, updateUser,post_image } from "../../store/actions/authAction"
+import { getInfoUserLogin, updateUser, post_image } from "../../store/actions/authAction";
+import ChangePassword from "./ChangePassword";
+// import {connect} from "react-redux";
+
+
 let moment = require('moment');
 
-
-
 class InformationUser extends Component {
+    props: any = this.props;
     state = {
-        url : null,
+        url: null,
         Data: {
             Id: "",
             FullName: "",
             AccountType: "",
-            Birthday: Date,
+            Birthday: "",
             Address: "",
             AvatarUrl: "",
             PhoneNumber: "",
             Gender: "",
             Email: "",
-            ImageUrl: ""
-        }
+            Password: "",
+        },
     };
 
     showDOB = () => {
         return moment(this.state.Data.Birthday).format("DD/MM/YYYY");
     }
+   
     showGender = () => {
-        return this.state.Data.Gender ? "Male" : "Female"
+        return this.state.Data.Gender ? "Male" : "Female";
     }
 
+
+    async GetImage = () =>{
+
+    }
+    onFileChange = (e:any) =>{
+        const formData = new FormData();
+      let AvatarUrl = e.target.files[0];
+      // let limit = 1024 * 1024 * 2;
+      // if (file["size"] > limit) {
+      //   Swal({
+      //     type: "error",
+      //     title: "Oops...",
+      //     text: "You are uploading a large file"
+      //   });
+      //   return false;
+      // }
+      formData.append("image", AvatarUrl);
+      this.
+      //Tranfer data to get
+      AvatarUrl = this.state.Data.AvatarUrl;
+    //   this.state.Data.AvatarUrl = URL?.createObjectURL(AvatarUrl);
+    }
     handleChange = (e: any) => {
         let state: any = this.state;
         let data: any = state.Data;
@@ -36,51 +62,35 @@ class InformationUser extends Component {
             state
         });
     }
-    // Call from authAction
-    
-     async GetImage(formData:any) {
-       console.log(post_image)
-        return await post_image(formData);
-     } 
-     onFileChange(event:any) {
-        const formData = new FormData();
-        const file = event.target.files[0];
-        formData.append("image", file);
-        this.GetImage(formData);
-        this.state.Data.AvatarUrl = URL?.createObjectURL(file);
-        return false;
-      }
 
     handleSubmit = (e: any) => {
         e.preventDefault();
-        this.updateUserData();
+        this.updateUserData()
+        
+        this.showDOB()
     }
 
     updateUserData = () => {
-        var moment = require('moment');
         let dataUser = {
             Id: this.state.Data.Id,
             PhoneNumber: this.state.Data.PhoneNumber,
             Email: this.state.Data.Email,
             FullName: this.state.Data.FullName,
             AvatarUrl: this.state.Data.AvatarUrl,
-            Birthday: moment(this.state.Data.Birthday).format(),
+            Birthday: moment(this.state.Data.Birthday).format("DD/MM/YYYY"),
             Address: this.state.Data.Address,
         }
-        console.log(dataUser);
         return updateUser(dataUser)
     }
 
-    // saveData = () => {
-    //     let userInfo = {};
-    //     userInfo.name = this.state.Data.FullName;
-    // }
-
     async componentDidMount() {
+        let data = this.state.Data.AvatarUrl;
         let account = await getInfoUserLogin();
         this.setState({
-            Data: account.Data.Account
+            Data: account.Data.Account,
+            
         });
+        let url = await post_image(data);
     }
 
     render() {
@@ -88,37 +98,39 @@ class InformationUser extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col-4">
-                       <form >
-                       <img src="{this.state.Data.AvatarUrl}" alt="Avatar"/>
-                       <p>{this.state.Data.AvatarUrl}</p>
-                       <input type="file" onChange={(e)=> this.onFileChange(e)} name="profile_avatar"  accept=".png, .jpg, .jpeg"  />
-                            <h3 className="font-weight-bold">{this.state.Data.FullName}</h3>
-                            <p className="text-muted font-weight-bold">{this.state.Data.AccountType}</p>
-                            <p className="font-weight-bold ">{this.state.Data.PhoneNumber}</p>
-                            <p className="font-weight-bold ">{this.showGender()}</p>
-                            <p className="font-weight-bold ">{this.state.Data.Birthday}</p>
-                            <p className="font-weight-bold ">{this.state.Data.Address}</p>
-                            <hr />
-                            <br />
-                       </form>
+                        <img
+                            src={this.state.Data.AvatarUrl}
+                            className="Avatar-Profile"
+                            alt="avatar"
+                        />
+                       
+                        <h3 className="font-weight-bold">{this.state.Data.FullName}</h3>
+                        <p className="text-muted font-weight-bold">{this.state.Data.AccountType}</p>
+                        <p className="font-weight-bold ">{this.state.Data.PhoneNumber}</p>
+                        <p className="font-weight-bold ">{this.showGender()}</p>
+                        <p className="font-weight-bold ">{this.showDOB()}</p>
+                        <p className="font-weight-bold ">{this.state.Data.Address}</p>
+                        <p className="font-weight-bold ">{this.state.Data.Email}</p>
+                        <hr />
+                        <ChangePassword />
+                        
                     </div>
                     <div className="col-8">
                         <form onChange={(e) => this.handleChange(e)} onSubmit={(e) => this.handleSubmit(e)}>
-                            <div>
-                               
-                                {/* <button
-                                    type="submit"
-                                    className="btn btn-dark"
-                                >
-                                    Cancel
-                                </button> */}
-                            </div>
+                            
+                            <button
+                                type="submit"
+                                className="btn btn-info"
+                            >
+                                Save
+                            </button>
                             <hr />
+                            <input type="file" name="profile_avatar"  accept=".png, .jpg, .jpeg"  onChange={(e) => this.onFileChange(e)}/>
                             <div className="form-group ">
                                 <label className="float-left">Full Name</label>
                                 <input
                                     type="text"
-                                    className="form-control-plaintext"
+                                    className="form-control"
                                     name="FullName"
                                     defaultValue={this.state.Data.FullName}
                                 />
@@ -127,25 +139,16 @@ class InformationUser extends Component {
                                 <label className="float-left">Date of Birth</label>
                                 <input
                                     type="date"
-                                    className="form-control-plaintext"
+                                    className="form-control"
                                     name="Birthday"
                                     defaultValue={this.showDOB()}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label className="float-left">Phone</label>
-                                <input
-                                    type="number"
-                                    className="form-control-plaintext"
-                                    name="PhoneNumber"
-                                    defaultValue={this.state.Data.PhoneNumber}
                                 />
                             </div>
                             <div className="form-group">
                                 <label className="float-left">Email</label>
                                 <input
                                     type="email"
-                                    className="form-control-plaintext"
+                                    className="form-control"
                                     name="Email"
                                     defaultValue={this.state.Data.Email}
                                 />
@@ -154,17 +157,11 @@ class InformationUser extends Component {
                                 <label className="float-left">Address</label>
                                 <input
                                     type="text"
-                                    className="form-control-plaintext"
+                                    className="form-control"
                                     name="Address"
                                     defaultValue={this.state.Data.Address}
                                 />
                             </div>
-                            <button
-                                    type="submit"
-                                    className="btn btn-info w-25 float-right"
-                                >
-                                    Save
-                                </button>
                         </form>
                     </div>
                 </div>
@@ -172,29 +169,5 @@ class InformationUser extends Component {
         );
     }
 }
-
-const mapStateToProps = (state: any) => {
-    return {
-        // status: state.status,
-        editUser: state.editUser
-    }
-}
-
-const mapDispatchToProps = (dispatch: any) => {
-    return {
-        changeEditStatus: () => {
-            dispatch({
-                type: 'CHANGE_STATUS'
-            })
-        },
-        getEditData: (editObj: any) => {
-            dispatch({
-                type: 'GET_EDIT_DATA',
-                editObj //tham số nhận vào  
-            })
-        }
-    }
-}
-
 
 export default InformationUser;

@@ -30,25 +30,25 @@ export const updateUser = (dataUser: any) => {
       return response
     })
 };
-
-
-  export const post_image = (data: any) =>{
+  export const post_image = (data:any) =>{
     return httpService.post_file(
       "HubCommon.FileUpload",
       "UploadImage",
       data
-    ).then(data => {
-      return data.Data.ImageUrl;
+    ).then(response  => { 
+      localStorage.setItem("data", JSON.stringify(data));
+      return response;
     });
   }
+export const changePassword = (formChangePassword: any) => {
+  return httpService
+  .post("Authentications.Accounts", "ChangePassword", formChangePassword)
+  .then(response => {
+    if (formChangePassword === {}) {
+      saveToken(response.Data.SessionInfo.Token);
+      localStorage.setItem("formChangePassword", JSON.stringify(formChangePassword));
+    }
+    return response
+  })
+}
 
-  // async GetImage(data:any) {
-  //   return await HttpService.post_image(
-  //     "HubCommon.FileUpload",
-  //     "UploadImage",
-  //     data
-  //   ).then(({ data }) => {
-  //     this.url = data.this.state.Data.AvatarUrl;    
-  //     return this.url;
-  //   });
-  // }
