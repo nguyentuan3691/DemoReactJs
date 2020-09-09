@@ -1,10 +1,8 @@
 import React, { Component } from "react";
-import { getInfoUserLogin, updateUser } from "../../store/actions/authAction";
+import { getInfoUserLogin, updateUser, post_image, } from "../../store/actions/authAction";
 import ChangePassword from "./ChangePassword";
-// import {connect} from "react-redux";
 
-
-let moment = require('moment');
+let moment = require("moment");
 
 class InformationUser extends Component {
     props: any = this.props;
@@ -25,10 +23,22 @@ class InformationUser extends Component {
 
     showDOB = () => {
         return moment(this.state.Data.Birthday).format("DD/MM/YYYY");
-    }
+    };
 
     showGender = () => {
-        return this.state.Data.Gender ? "Female" : "Male";
+        return this.state.Data.Gender ? "Male" : "Female";
+    };
+
+    onFileChange = (form: any) => {
+        const formData = new FormData();
+        formData.append("image", form.target.AvatarUrl.files[0]);
+        return post_image(formData).then(result => {
+            return result.Data.ImageUrl;
+        });
+    };
+
+    loadImage = (): void => {
+        window.open(this.state.Data.AvatarUrl, "")
     }
 
     handleChange = (e: any) => {
@@ -36,33 +46,41 @@ class InformationUser extends Component {
         let data: any = state.Data;
         data[e.target.name] = e.target.value;
         this.setState({
-            state
+            state,
         });
-    }
+    };
 
+    // showGender = () => {
+    //     return this.state.Data.Gender ? "Female" : "Male";
+    // }
     handleSubmit = (e: any) => {
         e.preventDefault();
-        this.updateUserData()
-        this.showDOB()
-    }
+        this.onFileChange(e).then(avatarUrl => {
+            this.updateUserData(avatarUrl);
+        });
 
-    updateUserData = () => {
+
+        this.showDOB();
+
+    };
+    updateUserData = (avatarUrl: string) => {
         let dataUser = {
             Id: this.state.Data.Id,
             PhoneNumber: this.state.Data.PhoneNumber,
             Email: this.state.Data.Email,
             FullName: this.state.Data.FullName,
-            AvatarUrl: this.state.Data.AvatarUrl,
+            AvatarUrl: avatarUrl,
             Birthday: moment(this.state.Data.Birthday).format("DD/MM/YYYY"),
             Address: this.state.Data.Address,
-        }
-        return updateUser(dataUser)
-    }
+        };
+        return updateUser(dataUser);
+    };
 
     async componentDidMount() {
         let account = await getInfoUserLogin();
+        console.log(account);
         this.setState({
-            Data: account.Data.Account
+            Data: account.Data.Account,
         });
     }
 
@@ -71,13 +89,12 @@ class InformationUser extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col-4">
-                        <img
-                            src={this.state.Data.AvatarUrl}
-                            className="Avatar-Profile"
-                            alt="avatar"
-                        />
+                        <img src={this.state.Data.AvatarUrl} className="Avatar-Profile" alt="avatar" />
+
                         <h3 className="font-weight-bold">{this.state.Data.FullName}</h3>
-                        <p className="text-muted font-weight-bold">{this.state.Data.AccountType}</p>
+                        <p className="text-muted font-weight-bold">
+                            {this.state.Data.AccountType}
+                        </p>
                         <p className="font-weight-bold ">{this.state.Data.PhoneNumber}</p>
                         <p className="font-weight-bold ">{this.showGender()}</p>
                         <p className="font-weight-bold ">{this.showDOB()}</p>
@@ -85,17 +102,18 @@ class InformationUser extends Component {
                         <p className="font-weight-bold ">{this.state.Data.Email}</p>
                         <hr />
                         <ChangePassword />
-                        
                     </div>
                     <div className="col-8">
-                        <form onChange={(e) => this.handleChange(e)} onSubmit={(e) => this.handleSubmit(e)}>
-                            <button
-                                type="submit"
-                                className="btn btn-info"
-                            >
+                        <form
+                            onChange={(e) => this.handleChange(e)}
+                            onSubmit={(e) => this.handleSubmit(e)}
+                        >
+                            <button type="submit" className="btn btn-info">
                                 Save
-                            </button>
+              </button>
                             <hr />
+                            {/*  */}
+                            <input type="file" name="AvatarUrl" accept=".png, .jpg, .jpeg" />
                             <div className="form-group ">
                                 <label className="float-left">Full Name</label>
                                 <input
@@ -141,20 +159,3 @@ class InformationUser extends Component {
 }
 
 export default InformationUser;
-// const mapStateToProps = (state: any) => {
-//     return {
-//         status: state.status,
-//     }
-// }
-
-// const mapDispatchToProps = (dispatch: any) => {
-//     return {
-//         changeEditStatus: () => {
-//             dispatch({
-//                 type: "CHANGE_EDIT_STATUS"
-//             })
-//         }
-//     }
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(InformationUser);
