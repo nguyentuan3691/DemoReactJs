@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {changePassword, getInfoUserLogin} from '../../store/actions/authAction'
+import { changePassword, getInfoUserLogin } from '../../store/actions/authAction'
 
 class ChangePassword extends Component {
     state = {
@@ -81,6 +81,7 @@ class ChangePassword extends Component {
                             type="number"
                             className="form-control"
                             name="Password"
+                            minLength={8}
                             placeholder="Your new password"
                         />
                     </div>
@@ -104,12 +105,11 @@ class ChangePassword extends Component {
     render() {
         return (
             <div>
-                <form 
+                <form
                     onChange={(e) => this.handleChange(e)}
                     onSubmit={(e) => this.handleSubmit(e)}
                 >
                     <div className="ml-3">
-
                         {this.showForm()}
                     </div>
                 </form>

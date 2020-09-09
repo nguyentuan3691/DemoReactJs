@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class ForgotPassword extends Component {
+class MemberList extends Component {
     render() {
         return (
             <div>
-              <h1>Hello Khải</h1>
+                Hello world
             </div>
         );
     }
 }
 
-export default ForgotPassword;
+export default MemberList;

@@ -28,7 +28,7 @@ class InformationUser extends Component {
     }
 
     showGender = () => {
-        return this.state.Data.Gender ? "Male" : "Female";
+        return this.state.Data.Gender ? "Female" : "Male";
     }
 
     handleChange = (e: any) => {
@@ -43,7 +43,6 @@ class InformationUser extends Component {
     handleSubmit = (e: any) => {
         e.preventDefault();
         this.updateUserData()
-        
         this.showDOB()
     }
 

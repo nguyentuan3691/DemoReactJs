@@ -41,5 +41,23 @@ export const changePassword = (formChangePassword: any) => {
     }
     return response
   })
+};
+
+export const registerNewUser = (formRegister: any) => {
+  return httpService
+    .post("Authentications.Accounts", "Register", formRegister)
+    .then(response => {
+      if (formRegister === {}) {
+        saveToken(response.Data.SessionInfo.Token);
+        localStorage.setItem("formRegister", JSON.stringify(formRegister));
+      }
+      return response
+    })
+}
+
+export const accountType = () => {
+  return httpService
+    .get("Authentications.AccountTypes", "GetAccountTypes")
+    .then(response => {return response})
 }
 

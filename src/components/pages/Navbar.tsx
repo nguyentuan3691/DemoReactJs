@@ -3,19 +3,15 @@ import '../../assets/components/pages/Navbar.scss';
 import { Link, Route } from 'react-router-dom';
 import InformationUser from './InformationUser';
 import Registration from './Registration';
+import MemberList from './MemberList';
 
 interface Item {
   id: number;
   text: string;
 }
 
-// const DEFAULT_ITEMS: Item[] = [
-//   { id: 1, text: 'Convert my App to TypeScript' },
-//   { id: 2, text: 'Get a coffee' },
-// ];
 
 const Navbar = (): JSX.Element => {
-  // const [] = useState<Item[]>(DEFAULT_ITEMS);
 
   const logout = () => {
     localStorage.clear();
@@ -43,6 +39,12 @@ const Navbar = (): JSX.Element => {
           <li>
             <Link to="/home/create-member">
               Create Member
+            </Link>
+          </li>
+
+          <li>
+            <Link to="/home/member-list">
+              Member List
             </Link>
           </li>
 
@@ -116,6 +118,7 @@ const Navbar = (): JSX.Element => {
         </nav>
       <Route path="/home/information-update" component={InformationUser}/>
       <Route path="/home/create-member" component={Registration}/>
+      <Route path="/home/member-list" component={MemberList}/>
       </div>
     </div>
   </div>
