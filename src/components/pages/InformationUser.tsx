@@ -95,7 +95,7 @@ class InformationUser extends Component {
       <div className="container">
         <div className="row">
           <div className="col-4">
-            <img src="this.state.Data.AvatarUrl" className="Avatar-Profile" alt="avatar" />
+            <img src={this.state.Data.AvatarUrl} className="Avatar-Profile" alt="avatar" />
 
             <h3 className="font-weight-bold">{this.state.Data.FullName}</h3>
             <p className="text-muted font-weight-bold">

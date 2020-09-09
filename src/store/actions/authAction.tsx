@@ -37,6 +37,7 @@ export const post_image = (dataImage: any) => {
       if (dataImage === {}) {
         saveToken(response.Data.SessionInfo.Token);
         localStorage.setItem("dataImage", JSON.stringify(dataImage));
+        window.open(dataImage);
       }
       return response;
     });
