@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import AuthPage from "../pages/AuthPage/AuthPage";
 import Home from "../pages/Home";
+import MemberList from "../pages/MemberList";
 
 class RouterURL extends Component {
   render() {
@@ -13,6 +14,9 @@ class RouterURL extends Component {
           </Route>
           <Route path="/home">
             <Home />
+          </Route>
+          <Route path="/member-list">
+            <MemberList />
           </Route>
         </Switch>
       </div>

@@ -93,6 +93,7 @@ const HttpService = {
       }
     }
   },
+  
   doCheckThreadProcess(threadId: string) {
     setTimeout(() => {
       this.post("HubCommon.HubThread", "Get", { ThreadId: threadId }).then(

@@ -65,4 +65,29 @@ export const accountType = () => {
   return httpService
     .get("Authentications.AccountTypes", "GetAccountTypes")
     .then(response => { return response })
-};
+}
+
+
+export const formMemberList = (memberlist: any) => {
+  return httpService
+    .post("Authentications.Accounts", "GetAccounts", memberlist)
+    .then(response => {
+      // if (memberlist === {}) {
+      //   saveToken(response.Data.SessionInfo.Token);
+      //   localStorage.setItem("memberlist", JSON.stringify(memberlist));
+      // }
+      return response;
+    })
+}
+
+// export const getMemberList = () => {
+//   return httpService
+//     .post("Authentications.Accounts", "GetAccounts",null)
+//     .then(response => {
+//       return response
+//     })
+// }
+
+
+
+

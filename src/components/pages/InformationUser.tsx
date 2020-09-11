@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { getInfoUserLogin, updateUser, post_image, } from "../../store/actions/authAction";
+import '../../assets/components/pages/InformationUser.scss';
 import ChangePassword from "./ChangePassword";
 
 let moment = require("moment");
@@ -37,9 +38,9 @@ class InformationUser extends Component {
         });
     };
 
-    loadImage = (): void => {
-        window.open(this.state.Data.AvatarUrl, "")
-    }
+    // loadImage = (): void => {
+    //     window.open(this.state.Data.AvatarUrl, "")
+    // }
 
     handleChange = (e: any) => {
         let state: any = this.state;
