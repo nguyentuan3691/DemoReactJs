@@ -15,9 +15,9 @@ class RouterURL extends Component {
           <Route path="/home">
             <Home />
           </Route>
-          <Route path="/member-list">
+          {/* <Route path="/member-list">
             <MemberList />
-          </Route>
+          </Route> */}
         </Switch>
       </div>
     );
